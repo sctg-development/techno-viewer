@@ -65,12 +65,7 @@ jobs:
       
       - name: Encrypt demo assets
         run: |
-          rencrypt/target/release/rencrypt encrypt \                              
-              --path drawings/ \
-              --path schematics/ \
-              --path doc/ \
-              --path agro-crypt/ \
-              --keep-plaintext-manifest -v
+          ./rencrypt/target/release/rencrypt encrypt --path drawings/ --path schematics/ --path doc/ --path agro-crypt/ --keep-plaintext-manifest -v
               
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
