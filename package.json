@@ -34,6 +34,7 @@
     "@mlightcad/data-model": "1.7.34",
     "@monaco-editor/react": "^4.7.0",
     "@sctg/tracespace-view": "^5.1.6",
+    "@sctg/vite-plugin-github-pages-spa": "^0.2.0",
     "@tailwindcss/vite": "^4.3.0",
     "@vueuse/core": "^14.3.0",
     "age-encryption": "^0.3.0",

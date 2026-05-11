@@ -35,11 +35,11 @@ import Contact from './pages/Contact'
 /** Root application component. Configures the router, authentication context, and top-level route definitions. */
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Toast.Provider />
       <AuthProvider>
         <Layout>
-          <Routes>
+          <Routes >
             <Route path="/"         element={<Home />} />
             <Route path="/drawings" element={<DrawingsPage />} />
             <Route path="/docs"     element={<DocumentationPage />} />

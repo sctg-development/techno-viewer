@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
+import { githubPagesSpa } from "@sctg/vite-plugin-github-pages-spa";
 import {
   copyFileSync,
   createReadStream,
@@ -104,6 +105,7 @@ function encryptedAssetsPlugin() {
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
+    githubPagesSpa(),
     tailwindcss(),
     react(),
     vue(),
@@ -138,6 +140,7 @@ export default defineConfig({
   },
   define: {
     "process.env.NODE_DEBUG": false,
+    "import.meta.env.BASE_URL": process.env.BASE_URL ? JSON.stringify(process.env.BASE_URL) : JSON.stringify('/'),
   },
   resolve: {
     dedupe: ['react', 'react-dom', 'react/jsx-runtime'],
