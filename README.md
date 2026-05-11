@@ -7,6 +7,8 @@
 [![React](https://img.shields.io/badge/React-19-blue)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-8-646cff)](https://vitejs.dev/)
 [![AGE encryption](https://img.shields.io/badge/AGE-v1-green)](https://age-encryption.org/)
+[![Code](https://tokeisrv.sctg.eu.org/b1/github.com/sctg-development/fufuni?type=Rust,Javascript,TypeScript,TSX,html&category=code)]()
+[![Comments](https://tokeisrv.sctg.eu.org/b1/github.com/sctg-development/fufuni?type=Rust,Javascript,ypeScript,TSX,html&category=comments)]()
 
 ---
 
@@ -58,6 +60,24 @@ The sample encrypted assets include:
 - `schematics/` — Electronic schematic DXF (`BMS_Buck-Boost.dxf`)
 - `doc/` — PDF calculation note (`LM2587_BuckBoost_50W_Note_de_Calcul.pdf`)
 - `agro-crypt/` — [agro-crypt](https://github.com/sctg-development/agro-crypt) C source code
+
+---
+
+## Screenshots
+
+- Pseudo Login
+<img width="1886" height="1614" alt="image" src="https://github.com/user-attachments/assets/d7618122-b9c3-4013-b45c-dfa2782e54e0" />
+
+- DXF Viewer
+<img width="1883" height="1615" alt="image" src="https://github.com/user-attachments/assets/7cd59e89-aef8-4837-b556-6bb1f99fe2b4" />
+
+- Code Viewer
+<img width="1885" height="1617" alt="image" src="https://github.com/user-attachments/assets/b502c9fb-7c85-41e0-9824-27e9d3ccbbf2" />
+
+- Gerber viewer
+<img width="1887" height="1613" alt="image" src="https://github.com/user-attachments/assets/3bb618cb-bdd6-4aae-9eba-e4a2090006d7" />
+
+
 
 ---
 
