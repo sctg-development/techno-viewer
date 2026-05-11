@@ -11,7 +11,7 @@ Project summary:
 - Multilingual UI: French, English, Chinese
 
 When answering:
-- Prefer French unless user asks otherwise
+- Prefer English unless user asks otherwise
 - Be precise about file names and code locations
 - Focus on concrete fixes, audits, or enhancements
 - Avoid rewriting unrelated code
