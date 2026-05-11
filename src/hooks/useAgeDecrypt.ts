@@ -157,12 +157,13 @@ export function useAgeDecrypt(privateKey: string): UseAgeDecryptReturn {
     [privateKey]
   )
 
+  const getUrl = (url: string) => `${import.meta.env.BASE_URL}${url}`
   const decryptWithMetadata = useCallback(
     async (url: string): Promise<DecryptResult | null> => {
-      if (cache.current.has(url)) {
+      if (cache.current.has(getUrl(url))) {
         setState('success')
         return {
-          data: cache.current.get(url)!,
+          data: cache.current.get(getUrl(url))!,
           fromCache: true,
           source: 'memory',
         }
@@ -179,7 +180,7 @@ export function useAgeDecrypt(privateKey: string): UseAgeDecryptReturn {
         let source: DecryptSource = 'network'
 
         if (persistentCacheEnabled) {
-          encryptedBytes = await encryptedFileCache.get(url)
+          encryptedBytes = await encryptedFileCache.get(getUrl(url))
           if (encryptedBytes) {
             persistentCacheHitsRef.current += 1
             source = 'persistent'
@@ -190,20 +191,20 @@ export function useAgeDecrypt(privateKey: string): UseAgeDecryptReturn {
           if (persistentCacheEnabled) {
             persistentCacheMissesRef.current += 1
           }
-          const response = await fetch(url)
+          const response = await fetch(getUrl(url))
           if (!response.ok) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`)
           }
           encryptedBytes = new Uint8Array(await response.arrayBuffer())
           if (persistentCacheEnabled) {
-            await encryptedFileCache.set(url, encryptedBytes)
+            await encryptedFileCache.set(getUrl(url), encryptedBytes)
           }
         }
 
         const decrypter = new Decrypter()
         decrypter.addIdentity(privateKey.trim())
         const result = await decrypter.decrypt(encryptedBytes, 'uint8array')
-        cache.current.set(url, result)
+        cache.current.set(getUrl(url), result)
         if (persistentCacheEnabled) {
           void refreshPersistentCacheMetrics()
         }
@@ -225,7 +226,7 @@ export function useAgeDecrypt(privateKey: string): UseAgeDecryptReturn {
 
   const decrypt = useCallback(
     async (url: string): Promise<Uint8Array | null> => {
-      const result = await decryptWithMetadata(`${import.meta.env.BASE_URL}${url}`)
+      const result = await decryptWithMetadata(getUrl(url))
       return result?.data ?? null
     },
     [decryptWithMetadata]
