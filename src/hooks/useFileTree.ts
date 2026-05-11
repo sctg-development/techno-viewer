@@ -26,7 +26,7 @@ import { Decrypter } from 'age-encryption'
 import type { FileTree } from '../types'
 
 /** URL of the encrypted file-tree manifest served alongside the application. */
-const FILES_URL = '/files.json.age'
+const FILES_URL = `${import.meta.env.BASE_URL}/files.json.age`
 
 /** Return value of the {@link useFileTree} hook. */
 interface UseFileTreeReturn {
