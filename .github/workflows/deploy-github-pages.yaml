@@ -60,6 +60,17 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
 
+      - name: Cache Cargo
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            rencrypt/target
+          key: ${{ runner.os }}-cargo-rencrypt-${{ hashFiles('rencrypt/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-rencrypt-
+
       - name: Build rencrypt
         run: cargo build --manifest-path rencrypt/Cargo.toml --release
       
@@ -82,7 +93,7 @@ jobs:
         # You can change the base path to your repository name
         run: |
           export NODE_ENV=production
-          BASE_URL=${{ github.event.repository.name }} npx vite build --base="/${{ github.event.repository.name }}/"
+          BASE_URL=/${{ github.event.repository.name }}/ npx vite build --base="/${{ github.event.repository.name }}/"
         
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v5

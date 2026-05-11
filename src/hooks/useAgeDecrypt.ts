@@ -27,7 +27,7 @@ import type { DecryptState } from '../types'
 import { encryptedFileCache, type EncryptedCacheStats } from '../services/encryptedFileCache'
 
 /** localStorage key storing whether persistent encrypted caching is enabled. */
-const PERSISTENT_CACHE_ENABLED_KEY = 'novasulf_persistent_encrypted_cache_enabled'
+const PERSISTENT_CACHE_ENABLED_KEY = 'techno_viewer_persistent_encrypted_cache_enabled'
 
 /** Returns `true` when persistent encrypted caching should be enabled by default. */
 function loadPersistentCacheEnabled(): boolean {
@@ -225,7 +225,7 @@ export function useAgeDecrypt(privateKey: string): UseAgeDecryptReturn {
 
   const decrypt = useCallback(
     async (url: string): Promise<Uint8Array | null> => {
-      const result = await decryptWithMetadata(url)
+      const result = await decryptWithMetadata(`${import.meta.env.BASE_URL}${url}`)
       return result?.data ?? null
     },
     [decryptWithMetadata]
