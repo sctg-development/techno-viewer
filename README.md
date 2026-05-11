@@ -7,8 +7,8 @@
 [![React](https://img.shields.io/badge/React-19-blue)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-8-646cff)](https://vitejs.dev/)
 [![AGE encryption](https://img.shields.io/badge/AGE-v1-green)](https://age-encryption.org/)
-[![Code](https://tokeisrv.sctg.eu.org/b1/github.com/sctg-development/fufuni?type=Rust,Javascript,TypeScript,TSX,html&category=code)]()
-[![Comments](https://tokeisrv.sctg.eu.org/b1/github.com/sctg-development/fufuni?type=Rust,Javascript,ypeScript,TSX,html&category=comments)]()
+[![Code](https://tokeisrv.sctg.eu.org/b1/github.com/sctg-development/fufuni?type=Rust,TypeScript,TSX,html&category=code)]()
+[![Comments](https://tokeisrv.sctg.eu.org/b1/github.com/sctg-development/fufuni?type=Rust,ypeScript,TSX,html&category=comments)]()
 
 ---
 
