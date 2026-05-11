@@ -1,0 +1,64 @@
+# .github/workflows/deploy.yml
+name: Build & Deploy to Cloudflare Pages
+
+on:
+  # push:
+  #   branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Build SPA
+        run: |
+          # Copy cad-viewer CSS (gitignored, generated at build time)
+          cp node_modules/@mlightcad/cad-viewer/dist/index.css src/cad-viewer.css
+          # encrypted/ is automatically copied to dist/encrypted/ by encryptedAssetsPlugin
+          echo "APP_NAME=SPOT-ANALYZER" > .env
+          npm run build:env
+        env:
+          NODE_ENV: production
+
+      # - name: Update Cloudflare Pages Environment Variables from Github Secrets
+      #   uses: cloudflare/wrangler-action@v3
+      #   with:
+      #     apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      #     accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      #     command: |
+      #       pages env set POSTHOG_PROJECT_TOKEN ${{ secrets.POSTHOG_PROJECT_TOKEN }} --project-name=spot-analyzer --branch=main
+      #       pages env set POSTHOG_HOST ${{ secrets.POSTHOG_HOST }} --project-name=spot-analyzer --branch=main
+      - name: Create wrangler.toml
+        run: |
+          echo "name = 'spot-analyzer'" > wrangler.toml
+          echo "compatibility_date = '2026-05-11'" >> wrangler.toml
+          echo "pages_build_output_dir = 'dist'" >> wrangler.toml
+          echo "[vars]" >> wrangler.toml
+          echo "  POSTHOG_PROJECT_TOKEN = '${{ secrets.POSTHOG_PROJECT_TOKEN }}'" >> wrangler.toml
+          echo "  POSTHOG_HOST = '${{ secrets.POSTHOG_HOST }}'" >> wrangler.toml
+          echo "[env.production.vars]" >> wrangler.toml
+          echo "  POSTHOG_PROJECT_TOKEN = '${{ secrets.POSTHOG_PROJECT_TOKEN }}'" >> wrangler.toml
+          echo "  POSTHOG_HOST = '${{ secrets.POSTHOG_HOST }}'" >> wrangler.toml
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy --branch=main

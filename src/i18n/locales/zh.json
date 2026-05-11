@@ -1,0 +1,151 @@
+{
+  "nav": {
+    "home":       "首页",
+    "docs":       "文档",
+    "drawings":   "图纸",
+    "source_code": "源代码",
+    "schematics":   "原理图",
+    "technical":  "技术数据",
+    "contact":    "联系我们"
+  },
+  "hero": {
+    "title":    "H2S 分析仪 —",
+    "subtitle": "技术界面",
+    "tagline":  "文档与技术文件"
+  },
+  "home": {
+    "datasheet":    "技术规格书",
+    "drawings":   "图纸和原理图",
+    "calibration":  "校准程序",
+    "technical_specs": "技术规格",
+    "welcome_title":  "欢迎使用 INDUSTRIAL-ANALYZER 技术界面",
+    "welcome_text":   "访问 H2S 分析仪的技术图纸、文档和操作程序。您的文件已加密并受到保护。",
+    "open_drawings":  "浏览图纸",
+    "open_docs":      "浏览文档",
+    "brand_label": "SPOT ANALYZER",
+    "spec_table_id": "表. 01",
+    "schematic": {
+      "sensor": "传感器",
+      "array": "阵列",
+      "figure": "图 01",
+      "unit_mm": "毫米"
+    },
+    "spec_headers": {
+      "parameter": "参数",
+      "value_left": "数值",
+      "value_right": "数值"
+    },
+    "spec_rows": {
+      "range_label": "",
+      "range_v1": "0-10 PPM H₂S",
+      "range_v2": "0-5 PPM H₂S",
+      "accuracy_label": "测量范围",
+      "accuracy_v1": "±1% FS",
+      "accuracy_v2": "±1% F",
+      "power_label": "电源",
+      "power_v1": "220 V AC",
+      "power_v2": "220V DC",
+      "output_label": "输出",
+      "output_v1": "4-20mA / RS485",
+      "output_v2": "4-20mA / Modbus"
+    }
+  },
+  "auth": {
+    "title":           "安全访问",
+    "subtitle":        "输入您的凭据以访问技术文件。",
+    "username_label":  "用户名",
+    "username_placeholder": "例如:user042",
+    "key_label":       "私钥",
+    "key_placeholder": "AGE-SECRET-KEY-1...",
+    "login":           "登录",
+    "logout":          "退出",
+    "error_required":  "私钥为必填项。",
+    "error_format":    "密钥格式无效（必须以 AGE-SECRET-KEY-1 开头）。",
+    "logged_as":       "已登录为"
+  },
+  "files": {
+    "loading":          "加载文件中...",
+    "error_load":       "无法加载文件树。",
+    "decrypt_loading":  "解密中...",
+    "decrypt_error":    "解密错误，请检查您的密钥。",
+    "download":         "下载",
+    "download_zip":     "下载为 ZIP",
+    "view":             "查看",
+    "no_selection":     "选择一个文件以预览。",
+    "select_all":       "全选",
+    "deselect_all":     "取消全选",
+    "selected":         "已选择 {{count}} 个文件",
+    "lang_fr":          "法语",
+    "lang_en":          "英语",
+    "lang_zh":          "中文",
+    "type_dxf":         "DXF 图纸",
+    "type_pdf":         "PDF 文档",
+    "type_cpp":         "C++ 源码",
+    "type_xlsx":        "Excel 电子表格",
+    "old_versions":     "历史版本",
+    "cache": {
+      "title": "离线加密缓存",
+      "toggle_on": "开启",
+      "toggle_off": "关闭",
+      "entries": "条目",
+      "size": "大小",
+      "hits": "命中",
+      "misses": "未命中",
+      "budget": "预算",
+      "origin": "来源",
+      "persisted": "持久化",
+      "not_available": "不可用",
+      "yes": "是",
+      "no": "否",
+      "refresh": "刷新",
+      "clear": "清空",
+      "clearing": "清空中..."
+    }
+  },
+  "viewer": {
+    "loading":    "加载查看器...",
+    "error":      "无法显示此文件。",
+    "download":   "下载此文件",
+    "close":      "关闭",
+    "monaco": {
+      "go_back": "返回",
+      "go_forward": "前进",
+      "ai_translate_comments": "AI：将注释翻译为英文",
+      "ai_explain_file": "AI：用英文 Markdown 解释文件",
+      "ai_download_translation": "下载翻译后的源码",
+      "ai_download_explanation": "下载 Markdown 解释",
+      "ai_translate_short": "AI 翻译",
+      "ai_explain_short": "AI 解释",
+      "ai_download_short": "下载",
+      "ai_running_short": "AI处理中...",
+      "ai_missing_key": "没有可用于 AI 代理的私钥。",
+      "ai_rate_limited": "达到本地限制：每分钟 10 次 AI 请求。",
+      "ai_translating": "正在翻译注释...",
+      "ai_explaining": "正在生成解释...",
+      "ai_toast_translating": "AI进行中：正在翻译注释",
+      "ai_toast_explaining": "AI进行中：正在解释文件",
+      "ai_toast_explaining_selection": "AI进行中：正在解释所选内容",
+      "ai_toast_annotating_junior": "AI进行中：正在添加面向初级开发者的行内注释",
+      "ai_translation_ready": "翻译已就绪并已缓存。",
+      "ai_explanation_ready": "解释已就绪并已缓存。",
+      "ai_error": "通过代理请求 AI 失败。",
+      "not_found": "未找到‘{{symbol}}’的定义",
+      "no_references": "未找到‘{{symbol}}’的引用",
+      "no_implementations": "未找到‘{{symbol}}’的实现",
+      "pick_definition": "‘{{symbol}}’的定义",
+      "pick_reference": "‘{{symbol}}’的引用",
+      "pick_implementation": "‘{{symbol}}’的实现"
+    }
+  },
+  "contact": {
+    "title":    "联系我们",
+    "subtitle": "如有任何关于 INDUSTRIAL-ANALYZER H2S 分析仪的技术问题，请联系我们。",
+    "company":  "ISMO Group",
+    "email":    "technique@example.com",
+    "address":  "英国"
+  },
+  "errors": {
+    "not_found":    "页面未找到",
+    "unauthorized": "未授权 — 请登录后继续。"
+  }
+}

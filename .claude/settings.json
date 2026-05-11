@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/Users/rlemeill/Development/novasulf/rencrypt/target/release/rencrypt --help)",
+      "Bash(/Users/rlemeill/Development/novasulf/rencrypt/target/release/rencrypt encrypt *)",
+      "Bash(/Users/rlemeill/Development/novasulf/rencrypt/target/release/rencrypt generate-keys *)"
+    ]
+  }
+}

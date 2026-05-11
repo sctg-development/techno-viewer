@@ -1,0 +1,21 @@
+# Security headers for all routes
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-XSS-Protection: 1; mode=block
+
+# CAD viewer iframe — must be embeddable by same origin
+/cad-viewer-iframe.html
+  X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy: frame-ancestors 'self'
+
+# Encrypted files — no cache, force download
+/encrypted/*
+  Cache-Control: no-store, no-cache, must-revalidate
+  Content-Disposition: attachment
+
+# Static assets — long cache
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

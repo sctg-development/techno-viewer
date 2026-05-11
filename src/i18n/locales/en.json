@@ -1,0 +1,151 @@
+{
+  "nav": {
+    "home":       "Home",
+    "docs":       "Documentation",
+    "drawings":   "Drawings",
+    "source_code": "Source Code",
+    "schematics":   "Schematics",
+    "technical":  "Technical Data",
+    "contact":    "Contact"
+  },
+  "hero": {
+    "title":    "Industrial Analyzer —",
+    "subtitle": "Technical Interface",
+    "tagline":  "Documentation & Technical Files"
+  },
+  "home": {
+    "datasheet":    "Technical Datasheet",
+    "drawings":     "Drawings and Schematics",
+    "calibration":  "Calibration Procedure",
+    "technical_specs": "Technical Specifications",
+    "welcome_title":  "Welcome to the Industrial Analyzer Technical Interface",
+    "welcome_text":   "Access technical drawings, documentation, and procedures for the Industrial Analyzer. Your files are encrypted and secure.",
+    "open_drawings":  "Browse Drawings",
+    "open_docs":      "Browse Documentation",
+    "brand_label": "INDUSTRIAL ANALYZER",
+    "spec_table_id": "Table. 01",
+    "schematic": {
+      "sensor": "SENSOR",
+      "array": "ARRAY",
+      "figure": "Fig 01",
+      "unit_mm": "mm"
+    },
+    "spec_headers": {
+      "parameter": "PARAMETER",
+      "value_left": "VALUE",
+      "value_right": "VALUE"
+    },
+    "spec_rows": {
+      "range_label": "",
+      "range_v1": "0-10 PPM H₂S",
+      "range_v2": "0-5 PPM H₂S",
+      "accuracy_label": "MEASUREMENT RANGE",
+      "accuracy_v1": "±1% FS",
+      "accuracy_v2": "±1% FS",
+      "power_label": "POWER SUPPLY",
+      "power_v1": "220 V AC",
+      "power_v2": "220V DC",
+      "output_label": "OUTPUT",
+      "output_v1": "4-20mA / RS485",
+      "output_v2": "4-20mA / Modbus"
+    }
+  },
+  "auth": {
+    "title":           "Secure Access",
+    "subtitle":        "Enter your credentials to access the technical files.",
+    "username_label":  "Username",
+    "username_placeholder": "e.g. user042",
+    "key_label":       "Private Key",
+    "key_placeholder": "AGE-SECRET-KEY-1...",
+    "login":           "Sign In",
+    "logout":          "Sign Out",
+    "error_required":  "Private key is required.",
+    "error_format":    "Invalid key format (must start with AGE-SECRET-KEY-1).",
+    "logged_as":       "Signed in as"
+  },
+  "files": {
+    "loading":          "Loading files...",
+    "error_load":       "Unable to load the file tree.",
+    "decrypt_loading":  "Decrypting...",
+    "decrypt_error":    "Decryption error. Please check your key.",
+    "download":         "Download",
+    "download_zip":     "Download as ZIP",
+    "view":             "View",
+    "no_selection":     "Select a file to preview it.",
+    "select_all":       "Select all",
+    "deselect_all":     "Deselect all",
+    "selected":         "{{count}} file(s) selected",
+    "lang_fr":          "French",
+    "lang_en":          "English",
+    "lang_zh":          "Chinese",
+    "type_dxf":         "DXF Drawings",
+    "type_pdf":         "PDF Documents",
+    "type_cpp":         "C++ Sources",
+    "type_xlsx":        "Excel Spreadsheets",
+    "old_versions":     "Archived versions",
+    "cache": {
+      "title": "Offline Encrypted Cache",
+      "toggle_on": "ON",
+      "toggle_off": "OFF",
+      "entries": "Entries",
+      "size": "Size",
+      "hits": "Hits",
+      "misses": "Misses",
+      "budget": "Budget",
+      "origin": "Origin",
+      "persisted": "Persisted",
+      "not_available": "n/a",
+      "yes": "yes",
+      "no": "no",
+      "refresh": "Refresh",
+      "clear": "Clear",
+      "clearing": "Clearing..."
+    }
+  },
+  "viewer": {
+    "loading":    "Loading viewer...",
+    "error":      "Unable to display this file.",
+    "download":   "Download this file",
+    "close":      "Close",
+    "monaco": {
+      "go_back": "Go Back",
+      "go_forward": "Go Forward",
+      "ai_translate_comments": "AI: translate comments to English",
+      "ai_explain_file": "AI: explain file in English markdown",
+      "ai_download_translation": "Download translated source",
+      "ai_download_explanation": "Download markdown explanation",
+      "ai_translate_short": "AI Translate",
+      "ai_explain_short": "AI Explain",
+      "ai_download_short": "Download",
+      "ai_running_short": "AI...",
+      "ai_missing_key": "No private key available for AI proxy.",
+      "ai_rate_limited": "Local limit reached: 10 AI requests/minute.",
+      "ai_translating": "Translating comments...",
+      "ai_explaining": "Generating explanation...",
+      "ai_toast_translating": "AI in progress: translating comments",
+      "ai_toast_explaining": "AI in progress: explaining file",
+      "ai_toast_explaining_selection": "AI in progress: explaining selection",
+      "ai_toast_annotating_junior": "AI in progress: adding inline junior comments",
+      "ai_translation_ready": "Translation ready and cached.",
+      "ai_explanation_ready": "Explanation ready and cached.",
+      "ai_error": "AI proxy request failed.",
+      "not_found": "No definition found for ‘{{symbol}}’",
+      "no_references": "No references found for ‘{{symbol}}’",
+      "no_implementations": "No implementations found for ‘{{symbol}}’",
+      "pick_definition": "Definitions of ‘{{symbol}}’",
+      "pick_reference": "References of ‘{{symbol}}’",
+      "pick_implementation": "Implementations of ‘{{symbol}}’"
+    }
+  },
+  "contact": {
+    "title":    "Contact",
+    "subtitle": "For any technical questions regarding the INDUSTRIAL-ANALYZER H2S analyzer.",
+    "company":  "ISMO Group",
+    "email":    "technique@example.com",
+    "address":  "United Kingdom"
+  },
+  "errors": {
+    "not_found":    "Page not found",
+    "unauthorized": "Unauthorized — Please sign in to continue."
+  }
+}

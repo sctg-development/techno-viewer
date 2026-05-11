@@ -1,0 +1,7 @@
+# SPA routing — all routes serve index.html
+/drawings /index.html 301
+/docs /index.html 301
+/source-code /index.html 301
+/schematics /index.html 301
+/contact /index.html 301
+/*    /index.html    200

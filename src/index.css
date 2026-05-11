@@ -1,0 +1,183 @@
+/**
+ * Copyright (c) Ronan Le Meillat - SCTG Development 2008-2026
+ * Licensed under the MIT License
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+@import "tailwindcss";
+@import "@heroui/styles";
+@import "../node_modules/@sctg/tracespace-view/lib/style.css";
+@source "../node_modules/@sctg/tracespace-view/src";
+
+/* ────────────────────────────────────────────────────────────
+   SPOT ANALYZER — Technical Paper Theme
+   Inspired by vintage engineering documentation
+──────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Paper / cream palette */
+  --color-paper-50:  #fdfaf2;
+  --color-paper-100: #f7f0d8;
+  --color-paper-200: #f0e4b8;
+  --color-paper-300: #e8d595;
+  --color-paper-400: #dfc370;
+  --color-paper-500: #d4ae4a;
+
+  /* Technical red accent */
+  --color-tech-red:       #c0392b;
+  --color-tech-red-dark:  #922b21;
+  --color-tech-red-light: #e74c3c;
+
+  /* Ink / dark */
+  --color-ink-900: #0d0d0d;
+  --color-ink-800: #1a1a1a;
+  --color-ink-700: #2d2d2d;
+  --color-ink-600: #4a4a4a;
+  --color-ink-400: #888888;
+  --color-ink-200: #cccccc;
+
+  /* Fonts */
+  --font-mono: "Share Tech Mono", "Courier New", monospace;
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+
+  /* Primary color mapping (not in HeroUI shared/theme.css) */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  /* Secondary & tertiary color mapping — paper palette */
+  --color-secondary: #e8d595;
+  --color-secondary-foreground: #1a1a1a;
+  --color-tertiary: #dfc370;
+  --color-tertiary-foreground: #1a1a1a;
+}
+
+/* HeroUI semantic color overrides — light theme */
+.light {
+  --background:           #f9f2e2;   /* warm paper */
+  --foreground:           #1a1a1a;   /* ink black */
+  --accent:               #c0392b;   /* tech red */
+  --accent-foreground:    #fdfaf2;
+  --muted:                #f0e8d2;
+  --muted-foreground:     #645a46;
+  --border:               #c8b99b;
+  --primary:              #c0392b;
+  --primary-foreground:   #fdfaf2;
+  --secondary:            #f0e8d2;
+  --secondary-foreground: #1a1a1a;
+  --surface:              #fdfaf2;
+  --surface-foreground:   #1a1a1a;
+  --overlay:              #fdfaf2;
+  --overlay-foreground:   #1a1a1a;
+}
+
+/* ── Base typography ─────────────────────────────────────── */
+html, body {
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* ── Technical decoration helpers ───────────────────────── */
+.tech-corner {
+  position: relative;
+}
+.tech-corner::before,
+.tech-corner::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--accent);
+  border-style: solid;
+  pointer-events: none;
+}
+.tech-corner::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+.tech-corner::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+/* ── Grid overlay for technical feel ────────────────────── */
+.tech-grid-bg {
+  background-image:
+    linear-gradient(rgba(200,185,155,0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,185,155,0.3) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── File tree styles ────────────────────────────────────── */
+.file-tree-item {
+  @apply flex items-center gap-2 px-2 py-1 rounded cursor-pointer transition-colors;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+.file-tree-item:hover {
+  background-color: rgba(192, 57, 43, 0.08);
+}
+.file-tree-item.selected {
+  background-color: rgba(192, 57, 43, 0.15);
+  color: var(--accent);
+}
+
+/* ── Coordinate markers ──────────────────────────────────── */
+.coord-marker {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+/* ── Technical button override ───────────────────────────── */
+.btn-tech {
+  @apply uppercase tracking-widest text-xs font-medium;
+  font-family: var(--font-mono);
+  border: 1px solid currentColor;
+  letter-spacing: 0.15em;
+}
+
+/* ── Section title ───────────────────────────────────────── */
+.section-title {
+  @apply uppercase tracking-widest text-sm;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  letter-spacing: 0.2em;
+}
+
+/* ── Scrollbar styling ───────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}

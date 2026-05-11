@@ -1,0 +1,151 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "docs": "Documentation",
+    "drawings": "Schémas",
+    "source_code": "Code source",
+    "schematics": "Schémas électroniques",
+    "technical": "Données Techniques",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Analyseur industriel —",
+    "subtitle": "Interface Technique",
+    "tagline": "Documentation & fichiers techniques"
+  },
+  "home": {
+    "datasheet": "Fiche Technique",
+    "drawings": "Plans et Schémas",
+    "calibration": "Procédure Calibration",
+    "technical_specs": "Caractéristiques Techniques",
+    "welcome_title": "Bienvenue sur l'interface technique INDUSTRIAL ANALYZER",
+    "welcome_text": "Accédez aux schémas techniques, documentations et procédures de l'analyseur industriel. Vos fichiers sont chiffrés et sécurisés.",
+    "open_drawings": "Accéder aux schémas",
+    "open_docs": "Accéder à la documentation",
+    "brand_label": "INDUSTRIAL ANALYZER",
+    "spec_table_id": "Table. 01",
+    "schematic": {
+      "sensor": "CAPTEUR",
+      "array": "MATRICE",
+      "figure": "Fig 01",
+      "unit_mm": "mm"
+    },
+    "spec_headers": {
+      "parameter": "PARAMÈTRE",
+      "value_left": "VALEUR",
+      "value_right": "VALEUR"
+    },
+    "spec_rows": {
+      "range_label": "",
+      "range_v1": "0-10 PPM H₂S",
+      "range_v2": "0-5 PPM H₂S",
+      "accuracy_label": "PLAGE DE MESURE",
+      "accuracy_v1": "±1% PE",
+      "accuracy_v2": "±1% PE",
+      "power_label": "ALIMENTATION",
+      "power_v1": "220 V AC",
+      "power_v2": "220V DC",
+      "output_label": "SORTIE",
+      "output_v1": "4-20mA / RS485",
+      "output_v2": "4-20mA / Modbus"
+    }
+  },
+  "auth": {
+    "title": "Accès sécurisé",
+    "subtitle": "Entrez vos identifiants pour accéder aux fichiers techniques.",
+    "username_label": "Nom d'utilisateur",
+    "username_placeholder": "ex: user042",
+    "key_label": "Clé privée",
+    "key_placeholder": "AGE-SECRET-KEY-1...",
+    "login": "Accéder",
+    "logout": "Déconnexion",
+    "error_required": "La clé privée est requise.",
+    "error_format": "Format de clé invalide (doit commencer par AGE-SECRET-KEY-1).",
+    "logged_as": "Connecté en tant que"
+  },
+  "files": {
+    "loading": "Chargement des fichiers...",
+    "error_load": "Impossible de charger l'arborescence des fichiers.",
+    "decrypt_loading": "Déchiffrement en cours...",
+    "decrypt_error": "Erreur de déchiffrement. Vérifiez votre clé.",
+    "download": "Télécharger",
+    "download_zip": "Télécharger en ZIP",
+    "view": "Visualiser",
+    "no_selection": "Sélectionnez un fichier pour le visualiser.",
+    "select_all": "Tout sélectionner",
+    "deselect_all": "Tout désélectionner",
+    "selected": "{{count}} fichier(s) sélectionné(s)",
+    "lang_fr": "Français",
+    "lang_en": "Anglais",
+    "lang_zh": "Chinois",
+    "type_dxf": "Schémas DXF",
+    "type_pdf": "Documents PDF",
+    "type_cpp": "Sources C++",
+    "type_xlsx": "Fichiers Excel",
+    "old_versions": "Versions archivées",
+    "cache": {
+      "title": "Cache chiffré hors ligne",
+      "toggle_on": "ACTIF",
+      "toggle_off": "INACTIF",
+      "entries": "Entrées",
+      "size": "Taille",
+      "hits": "Hits",
+      "misses": "Misses",
+      "budget": "Budget",
+      "origin": "Origine",
+      "persisted": "Persisté",
+      "not_available": "n/d",
+      "yes": "oui",
+      "no": "non",
+      "refresh": "Rafraîchir",
+      "clear": "Vider",
+      "clearing": "Vidage..."
+    }
+  },
+  "viewer": {
+    "loading": "Chargement du visualiseur...",
+    "error": "Impossible d'afficher ce fichier.",
+    "download": "Télécharger ce fichier",
+    "close": "Fermer",
+    "monaco": {
+      "go_back": "Retour",
+      "go_forward": "Suivant",
+      "ai_translate_comments": "IA: traduire les commentaires en anglais",
+      "ai_explain_file": "IA: expliquer le fichier en markdown (anglais)",
+      "ai_download_translation": "Télécharger le fichier traduit",
+      "ai_download_explanation": "Télécharger l'explication markdown",
+      "ai_translate_short": "IA Traduire",
+      "ai_explain_short": "IA Expliquer",
+      "ai_download_short": "Télécharger",
+      "ai_running_short": "IA...",
+      "ai_missing_key": "Aucune clé privée disponible pour le proxy IA.",
+      "ai_rate_limited": "Limite locale atteinte: 10 requêtes IA/minute.",
+      "ai_translating": "Traduction des commentaires en cours...",
+      "ai_explaining": "Génération de l'explication en cours...",
+      "ai_toast_translating": "IA en cours: traduction des commentaires",
+      "ai_toast_explaining": "IA en cours: explication du fichier",
+      "ai_toast_explaining_selection": "IA en cours: explication de la sélection",
+      "ai_toast_annotating_junior": "IA en cours: ajout de commentaires inline junior",
+      "ai_translation_ready": "Traduction prête et mise en cache.",
+      "ai_explanation_ready": "Explication prête et mise en cache.",
+      "ai_error": "Échec de la requête IA via proxy.",
+      "not_found": "Aucune définition trouvée pour ‘{{symbol}}’",
+      "no_references": "Aucune référence trouvée pour ‘{{symbol}}’",
+      "no_implementations": "Aucune implémentation trouvée pour ‘{{symbol}}’",
+      "pick_definition": "Définitions de ‘{{symbol}}’",
+      "pick_reference": "Références de ‘{{symbol}}’",
+      "pick_implementation": "Implémentations de ‘{{symbol}}’"
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Pour toute question technique concernant l'analyseur H2S INDUSTRIAL-ANALYZER.",
+    "company": "ISMO Group",
+    "email": "technique@example.com",
+    "address": "Royaume Uni"
+  },
+  "errors": {
+    "not_found": "Page introuvable",
+    "unauthorized": "Accès non autorisé — Connectez-vous pour continuer."
+  }
+}

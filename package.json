@@ -1,0 +1,65 @@
+{
+  "name": "techno-viewer",
+  "version": "1.0.0",
+  "description": "Secure client-side portal for browsing, decrypting and viewing encrypted engineering assets (DXF, PDF, XLSX, source code) using AGE keys",
+  "homepage": "https://github.com/sctg-development/techno-viewer#readme",
+  "bugs": {
+    "url": "https://github.com/sctg-development/techno-viewer/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sctg-development/techno-viewer.git"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "author": "Ronan Le Meillat",
+  "type": "module",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "dev:env": "bash -c 'set -a && source .env && set +a; base=\"\"; for arg in \"$@\"; do case \"$arg\" in --base=*) base=\"${arg#*=}\";; esac; done; if [ -n \"$base\" ]; then export STORE_URL=\"http://localhost:5173${base}\"; export CORS_ORIGIN=\"http://localhost:5173${base}\"; fi; exec vite \"$@\"' --",
+    "build:env": "bash -c 'set -a && source .env && set +a && tsc && vite build \"$@\"' --",
+    "lint": "eslint ./src/**/**/*.{ts,tsx} --fix",
+    "type-check": "tsc --noEmit",
+    "preview:env": "bash -c 'set -a && source .env && set +a && vite preview \"$@\"' --",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "@heroui/react": "^3.0.4",
+    "@heroui/styles": "^3.0.4",
+    "@mlightcad/cad-simple-viewer": "1.5.0",
+    "@mlightcad/cad-viewer": "1.5.0",
+    "@mlightcad/data-model": "1.7.34",
+    "@monaco-editor/react": "^4.7.0",
+    "@sctg/tracespace-view": "^5.1.6",
+    "@tailwindcss/vite": "^4.3.0",
+    "@vueuse/core": "^14.3.0",
+    "age-encryption": "^0.3.0",
+    "element-plus": "^2.14.0",
+    "highlight.js": "^11.11.1",
+    "i18next": "^26.1.0",
+    "jszip": "^3.10.1",
+    "lucide-react": "^1.14.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-i18next": "^17.0.7",
+    "react-router-dom": "^7.15.0",
+    "tailwindcss": "^4.3.0",
+    "vite": "^8.0.12",
+    "vue": "^3.5.34",
+    "vue-i18n": "^11.4.2",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@heroui/react-mcp": "^1.1.0",
+    "@types/node": "^25.6.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitejs/plugin-vue": "^6.0.6",
+    "eslint": "^10.3.0",
+    "typescript": "^6.0.3"
+  }
+}

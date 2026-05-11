@@ -1,0 +1,7 @@
+target/
+encrypted/
+decrypted/
+keys/
+public/files.json
+public/files.json.age
+encrypted/
