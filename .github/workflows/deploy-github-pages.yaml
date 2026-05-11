@@ -81,7 +81,6 @@ jobs:
       - name: Build project
         # You can change the base path to your repository name
         run: |
-          cd ui
           export NODE_ENV=production
           npx vite build --base="/${{ github.event.repository.name }}/"
         
