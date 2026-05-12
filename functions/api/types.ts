@@ -33,45 +33,39 @@ export type ClientLocation = {
 };
 
 /**
- * Represents the properties of a files metric event.
- * @typedef {Object} FilesMetricEventProperties
- * @property {string} language - The language of the client.
- * @property {string} username - The username of the client.
- * @property {string | null} user_public_key - The public key of the user. Can be null if not available.
- * @property {Array<{ file: string; virtual_path: string; crypted_path: string }>} files - An array of files with their paths.
- * @property {number} file_count - The number of files.
- * @property {string | null} client_real_ip - The real IP address of the client. Can be null if not available.
- * @property {ClientLocation | null} client_location - The location of the client. Can be null if not available.
+ * Represents an individual file entry in a batch metric event.
  */
-export type FilesMetricEventProperties = {
+export type FileItem = {
+    file: string;
+    virtual_path: string;
+    crypted_path: string;
+};
+
+/**
+ * Shared PostHog metric event properties describing user and client context.
+ */
+export type BaseMetricEventProperties = {
     language: string;
     username: string;
     user_public_key: string | null;
-    files: Array<{ file: string; virtual_path: string; crypted_path: string }>;
-    file_count: number;
     client_real_ip: string | null;
     client_location: ClientLocation | null;
 };
 
 /**
- * Represents the properties of a file metric event.
- * @typedef {Object} FileMetricEventProperties
- * @property {string} language - The language of the client.
- * @property {string} username - The username of the client.
- * @property {string | null} user_public_key - The public key of the user. Can be null if not available.
- * @property {string} file - The name of the file.
- * @property {string} virtual_path - The virtual path of the file.
- * @property {string} crypted_path - The crypted path of the file.
- * @property {string | null} client_real_ip - The real IP address of the client. Can be null if not available.
- * @property {ClientLocation | null} client_location - The location of the client. Can be null if not available.
+ * Represents the properties of a files metric event.
  */
-export type FileMetricEventProperties = {
-    language: string;
-    username: string;
-    user_public_key: string | null;
+export type FilesMetricEventProperties = BaseMetricEventProperties & {
+    files: Array<FileItem>;
+    file_count: number;
+};
+
+/**
+ * Represents the properties of a file metric event.
+ */
+export type FileMetricEventProperties = BaseMetricEventProperties & {
     file: string;
     virtual_path: string;
     crypted_path: string;
-    client_real_ip: string | null;
-    client_location: ClientLocation | null;
+    from_cache: boolean;
 };

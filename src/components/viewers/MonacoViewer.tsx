@@ -27,6 +27,7 @@ import Editor, { type Monaco, type OnMount } from '@monaco-editor/react'
 import { toast } from '@heroui/react'
 import type { FileNode } from '../../types'
 import { useAuthContext } from '../../context/AuthContext'
+import { decodeUtf8, fetchJson, parseJsonSafe, postJson } from '../../utils/http'
 
 // ── Navigation history (module-level: persists across component remounts on file change) ──
 interface NavEntry { path: string; line: number; column: number }
@@ -313,8 +314,7 @@ export default function MonacoViewer({
         ]
         for (const url of candidates) {
           try {
-            const r = await fetch(url)
-            if (r.ok) return (await r.json()) as CodeIndexChunk
+            return await fetchJson<CodeIndexChunk>(url)
           } catch {
             // try next candidate URL
           }
@@ -322,8 +322,8 @@ export default function MonacoViewer({
         if (!encryptedPath) return null
         const dec = await decryptFile(`/${encryptedPath.replace(/^\/+/, '')}`)
         if (!dec) return null
-        try { return JSON.parse(new TextDecoder('utf-8', { fatal: false }).decode(dec)) as CodeIndexChunk }
-        catch { return null }
+        const decoded = decodeUtf8(dec, false)
+        return parseJsonSafe<CodeIndexChunk>(decoded)
       })()
       // Cache the promise immediately to deduplicate concurrent requests.
       // Remove it if it resolves to null so future calls can retry (e.g. after
@@ -364,27 +364,22 @@ export default function MonacoViewer({
   }, [])
 
   const fetchAiCompletion = useCallback(async (messages: Array<{ role: 'system' | 'user'; content: string }>): Promise<string> => {
-    const response = await fetch(AI_PROXY_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${privateKey}`,
-      },
-      body: JSON.stringify({
+    const body = await postJson<{ choices?: Array<{ message?: { content?: string } }> }>(
+      AI_PROXY_URL,
+      {
         model: AI_MODEL,
         stream: false,
         temperature: 0.2,
         top_p: 1,
         max_completion_tokens: 8192,
         messages,
-      }),
-    })
-    if (!response.ok) {
-      throw new Error(`Proxy error: ${response.status}`)
-    }
-    const body = await response.json() as {
-      choices?: Array<{ message?: { content?: string } }>
-    }
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${privateKey}`,
+        },
+      },
+    )
     const content = body.choices?.[0]?.message?.content?.trim()
     if (!content) throw new Error('Empty model response')
     return content

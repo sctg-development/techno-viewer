@@ -23,6 +23,7 @@
 
 import { identityToRecipient } from 'age-encryption'
 import type { Language } from '../types'
+import { postJson } from '../utils/http'
 
 /** Backend route that receives minimal file-view telemetry and forwards enriched events to PostHog. */
 const FILE_VIEW_ANALYTICS_ENDPOINT = '/api/file-viewed'
@@ -150,14 +151,7 @@ export async function trackFileViewed(input: FileViewAnalyticsInput): Promise<vo
       crypted_path: input.cryptedPath,
     }
 
-    await fetch(FILE_VIEW_ANALYTICS_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-      keepalive: true,
-    })
+    await postJson<void>(FILE_VIEW_ANALYTICS_ENDPOINT, payload, { keepalive: true })
   } catch {
     // Best-effort analytics only; file viewing must remain independent from monitoring delivery.
   }
@@ -185,14 +179,7 @@ export async function trackFilesDownloading(input: FilesDownloadingAnalyticsInpu
       })),
     }
 
-    await fetch(FILES_DOWNLOADING_ANALYTICS_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-      keepalive: true,
-    })
+    await postJson<void>(FILES_DOWNLOADING_ANALYTICS_ENDPOINT, payload, { keepalive: true })
   } catch {
     // Best-effort analytics only; ZIP generation must not depend on monitoring delivery.
   }

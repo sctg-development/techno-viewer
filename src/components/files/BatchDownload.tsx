@@ -27,6 +27,7 @@ import { Button, Spinner } from '@heroui/react'
 import { Download } from 'lucide-react'
 import JSZip from 'jszip'
 import type { FileNode } from '../../types'
+import { downloadBlob } from '../../utils/download'
 
 /** Props for the {@link BatchDownload} component. */
 interface BatchDownloadProps {
@@ -120,12 +121,7 @@ export default function BatchDownload({ selectedPaths, allNodes, decryptFile, on
       }
 
       const blob = await zip.generateAsync({ type: 'blob' })
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = `spot-analyzer-${Date.now()}.zip`
-      a.click()
-      URL.revokeObjectURL(url)
+      downloadBlob(blob, `spot-analyzer-${Date.now()}.zip`)
     } finally {
       setDownloading(false)
       setProgress(0)

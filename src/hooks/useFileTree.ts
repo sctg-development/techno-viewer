@@ -24,6 +24,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Decrypter } from 'age-encryption'
 import type { FileTree } from '../types'
+import { decodeUtf8, fetchArrayBuffer, parseJsonSafe } from '../utils/http'
 
 /** URL of the encrypted file-tree manifest served alongside the application. */
 const FILES_URL = `${import.meta.env.BASE_URL}files.json.age`
@@ -59,14 +60,13 @@ export function useFileTree(privateKey: string): UseFileTreeReturn {
 
     ;(async () => {
       try {
-        const response = await fetch(FILES_URL)
-        if (!response.ok) throw new Error(`HTTP ${response.status}`)
-        const bytes = new Uint8Array(await response.arrayBuffer())
+        const bytes = new Uint8Array(await fetchArrayBuffer(FILES_URL))
         const decrypter = new Decrypter()
         decrypter.addIdentity(privateKey.trim())
         const decrypted = await decrypter.decrypt(bytes, 'uint8array')
-        const json = new TextDecoder().decode(decrypted)
-        const data = JSON.parse(json) as FileTree
+        const json = decodeUtf8(decrypted)
+        const data = parseJsonSafe<FileTree>(json)
+        if (!data) throw new Error('Invalid file tree payload')
         if (!cancelled) setTree(data)
       } catch (err) {
         if (!cancelled) {

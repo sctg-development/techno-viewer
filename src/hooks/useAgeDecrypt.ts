@@ -25,28 +25,22 @@ import { useState, useCallback, useRef, useEffect } from 'react'
 import { Decrypter } from 'age-encryption'
 import type { DecryptState } from '../types'
 import { encryptedFileCache, type EncryptedCacheStats } from '../services/encryptedFileCache'
+import { fetchArrayBuffer } from '../utils/http'
+import { safeGetItem, safeSetItem } from '../utils/storage'
 
 /** localStorage key storing whether persistent encrypted caching is enabled. */
 const PERSISTENT_CACHE_ENABLED_KEY = 'techno_viewer_persistent_encrypted_cache_enabled'
 
 /** Returns `true` when persistent encrypted caching should be enabled by default. */
 function loadPersistentCacheEnabled(): boolean {
-  try {
-    const raw = localStorage.getItem(PERSISTENT_CACHE_ENABLED_KEY)
-    if (raw === null) return true
-    return raw !== '0'
-  } catch {
-    return true
-  }
+  const raw = safeGetItem(PERSISTENT_CACHE_ENABLED_KEY)
+  if (raw === null) return true
+  return raw !== '0'
 }
 
 /** Stores the persistent encrypted cache preference in localStorage. */
 function savePersistentCacheEnabled(enabled: boolean): void {
-  try {
-    localStorage.setItem(PERSISTENT_CACHE_ENABLED_KEY, enabled ? '1' : '0')
-  } catch {
-    // Non-blocking preference persistence.
-  }
+  safeSetItem(PERSISTENT_CACHE_ENABLED_KEY, enabled ? '1' : '0')
 }
 
 /** Runtime metrics exposed to the UI for persistent encrypted cache observability. */
@@ -191,11 +185,8 @@ export function useAgeDecrypt(privateKey: string): UseAgeDecryptReturn {
           if (persistentCacheEnabled) {
             persistentCacheMissesRef.current += 1
           }
-          const response = await fetch(getUrl(url))
-          if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`)
-          }
-          encryptedBytes = new Uint8Array(await response.arrayBuffer())
+          const bytes = await fetchArrayBuffer(getUrl(url))
+          encryptedBytes = new Uint8Array(bytes)
           if (persistentCacheEnabled) {
             await encryptedFileCache.set(getUrl(url), encryptedBytes)
           }
