@@ -21,24 +21,24 @@
  * THE SOFTWARE.
  */
 
-
+import type { ClientLocation, FileMetricEventProperties } from './types'
 /**
  * Name of the PostHog event emitted whenever a user opens a file in the portal viewer.
  * Keeping the event name in one constant prevents accidental spelling drift between releases.
  */
-const FILE_VIEWED_EVENT_NAME = 'File Viewed'
+const FILE_VIEWED_EVENT_NAME: string = 'File Viewed'
 
 /**
  * Default PostHog API base URL used when POSTHOG_HOST is not explicitly configured.
  * Cloudflare Pages production deployments should still provide POSTHOG_HOST through the deploy workflow.
  */
-const DEFAULT_POSTHOG_HOST = 'https://app.posthog.com'
+const DEFAULT_POSTHOG_HOST: string = 'https://app.posthog.com'
 
 /**
  * HTTP headers returned by every response from this endpoint.
  * The endpoint is same-origin for the SPA, but JSON headers keep local and production behavior explicit.
  */
-const JSON_HEADERS = {
+const JSON_HEADERS: Record<string, string> = {
   'Content-Type': 'application/json; charset=utf-8',
 }
 
@@ -50,7 +50,7 @@ const JSON_HEADERS = {
  * @param {EventContext<Record<string, string>, string, Record<string, unknown>>} context - Cloudflare Pages Function context.
  * @returns {Promise<Response>} JSON response describing whether the monitoring event was accepted.
  */
-export async function onRequestPost(context) {
+export async function onRequestPost(context: { request: Request; env: Record<string, string> }): Promise<Response> {
   const { request, env } = context
 
   if (!env.POSTHOG_PROJECT_TOKEN) {
@@ -87,7 +87,7 @@ export async function onRequestPost(context) {
         crypted_path: normalizedEvent.crypted_path,
         client_real_ip: getClientRealIp(request),
         client_location: getClientLocation(request),
-      },
+      } as FileMetricEventProperties,
     }),
   })
 
@@ -106,7 +106,7 @@ export async function onRequestPost(context) {
  * @param {Request} request - Incoming Cloudflare Pages request.
  * @returns {Promise<Record<string, unknown> | null>} Parsed JSON object, or `null` when parsing fails.
  */
-async function readJsonBody(request) {
+async function readJsonBody(request: Request): Promise<Record<string, unknown> | null> {
   try {
     const value = await request.json()
     return isPlainObject(value) ? value : null
@@ -123,7 +123,15 @@ async function readJsonBody(request) {
  * @param {Record<string, unknown>} payload - Raw JSON object received from the browser.
  * @returns {{username: string, file: string, language: string, user_public_key: string | null, from_cache: boolean, virtual_path: string, crypted_path: string} | null} Normalized event fields, or `null` if invalid.
  */
-function normalizeFileViewPayload(payload) {
+function normalizeFileViewPayload(payload: Record<string, unknown>): {
+  username: string;
+  file: string;
+  language: string;
+  user_public_key: string | null;
+  from_cache: boolean;
+  virtual_path: string;
+  crypted_path: string;
+} | null {
   const username = readNonEmptyString(payload.username)
   const file = readNonEmptyString(payload.file)
   const language = readAllowedLanguage(payload.language)
@@ -153,7 +161,7 @@ function normalizeFileViewPayload(payload) {
  * @param {unknown} value - Candidate value from the request payload.
  * @returns {string | null} Trimmed string, or `null` when the value is missing or empty.
  */
-function readNonEmptyString(value) {
+function readNonEmptyString(value: unknown): string | null {
   if (typeof value !== 'string') return null
   const trimmed = value.trim()
   return trimmed.length > 0 ? trimmed : null
@@ -166,7 +174,7 @@ function readNonEmptyString(value) {
  * @param {unknown} value - Candidate optional string value from the request payload.
  * @returns {string | null} Trimmed string or `null`.
  */
-function readNullableString(value) {
+function readNullableString(value: unknown): string | null {
   if (value === null || value === undefined) return null
   return readNonEmptyString(value)
 }
@@ -177,7 +185,7 @@ function readNullableString(value) {
  * @param {unknown} value - Candidate language value from the request payload.
  * @returns {'fr' | 'en' | 'zh' | null} Supported language code, or `null` when invalid.
  */
-function readAllowedLanguage(value) {
+function readAllowedLanguage(value: unknown): 'fr' | 'en' | 'zh' | null {
   if (value === 'fr' || value === 'en' || value === 'zh') return value
   return null
 }
@@ -189,7 +197,7 @@ function readAllowedLanguage(value) {
  * @param {Request} request - Incoming Cloudflare Pages request.
  * @returns {string | null} Client IP address when available.
  */
-function getClientRealIp(request) {
+function getClientRealIp(request: Request): string | null {
   const cloudflareIp = request.headers.get('CF-Connecting-IP')
   if (cloudflareIp) return cloudflareIp
 
@@ -207,7 +215,7 @@ function getClientRealIp(request) {
  * @param {Request & {cf?: {city?: string, country?: string}}} request - Incoming request with optional Cloudflare metadata.
  * @returns {{city: string | null, country: string | null}} Location object formatted for PostHog properties.
  */
-function getClientLocation(request) {
+function getClientLocation(request: Request & { cf?: { city?: string; country?: string } }): ClientLocation {
   return {
     city: request.cf?.city ?? null,
     country: formatCountryName(request.cf?.country),
@@ -221,7 +229,7 @@ function getClientLocation(request) {
  * @param {unknown} countryCode - ISO 3166-1 alpha-2 country code from Cloudflare request metadata.
  * @returns {string | null} Human-readable country name, original code fallback, or `null` when unavailable.
  */
-function formatCountryName(countryCode) {
+function formatCountryName(countryCode: unknown): string | null {
   if (typeof countryCode !== 'string' || countryCode.trim().length === 0) return null
 
   const normalizedCountryCode = countryCode.trim().toUpperCase()
@@ -239,7 +247,7 @@ function formatCountryName(countryCode) {
  * @param {unknown} host - Raw POSTHOG_HOST environment value.
  * @returns {string} PostHog host URL without trailing slash.
  */
-function normalizePostHogHost(host) {
+function normalizePostHogHost(host: unknown): string {
   const rawHost = typeof host === 'string' && host.trim().length > 0 ? host.trim() : DEFAULT_POSTHOG_HOST
   return rawHost.replace(/\/+$/, '')
 }
@@ -251,7 +259,7 @@ function normalizePostHogHost(host) {
  * @param {unknown} value - Candidate JSON value.
  * @returns {value is Record<string, unknown>} True when the value can be treated as a plain object.
  */
-function isPlainObject(value) {
+function isPlainObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
 
@@ -263,7 +271,7 @@ function isPlainObject(value) {
  * @param {Record<string, string>} [headers={}] - Extra headers to merge into the response.
  * @returns {Response} Cloudflare-compatible JSON response.
  */
-function jsonResponse(body, status = 200, headers = {}) {
+function jsonResponse(body: Record<string, unknown>, status: number = 200, headers: Record<string, string> = {}): Response {
   return new Response(JSON.stringify(body), {
     status,
     headers: {
@@ -272,3 +280,4 @@ function jsonResponse(body, status = 200, headers = {}) {
     },
   })
 }
+
